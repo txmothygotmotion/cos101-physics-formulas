@@ -1,0 +1,49 @@
+from collections import Counter
+
+
+# 1. Function to calculate the sum and average (mean)
+def get_sum_and_mean(numbers):
+    total = sum(numbers)
+    mean = total / len(numbers)
+    return total, mean
+
+
+# 2. Function to calculate the median
+def get_median(numbers):
+    sorted_nums = sorted(numbers)
+    n = len(sorted_nums)
+    mid = n // 2
+
+    # If the list length is even, average the two middle numbers
+    if n % 2 == 0:
+        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2
+    # If the list length is odd, return the exact middle number
+    return sorted_nums[mid]
+
+
+# 3. Function to calculate the mode
+def get_mode(numbers):
+    counts = Counter(numbers)
+    max_freq = max(counts.values())
+
+    # If every number appears the exact same number of times, there is no mode
+    if max_freq == 1 and len(numbers) > 1:
+        return "No unique mode"
+
+    # Returns a list of modes (handles single mode or multimodal ties)
+    modes = [num for num, freq in counts.items() if freq == max_freq]
+    return modes[0] if len(modes) == 1 else modes
+
+
+# --- Example Usage ---
+data = [10, 20, 20, 30, 40, 50]
+
+total_sum, average_mean = get_sum_and_mean(data)
+median_val = get_median(data)
+mode_val = get_mode(data)
+
+print(f"List: {data}")
+print(f"Sum: {total_sum}")
+print(f"Average / Mean: {average_mean}")
+print(f"Median: {median_val}")
+print(f"Mode: {mode_val}")
